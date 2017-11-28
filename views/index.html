@@ -1,18 +1,43 @@
+
 <!DOCTYPE html>
 <html>
-
-   <head>
-      <title>Backend Challenges | Free Code Camp</title>
-      <link rel="shortcut icon" href="https://cdn.hyperdev.com/us-east-1%3A52a203ff-088b-420f-81be-45bf559d01b1%2Ffavicon.ico" type="image/x-icon"/>
-      <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
-      <link href="/public/style.css" rel="stylesheet" type="text/css">
-   </head>
-
-   <body>
-      <div class="container">
-         <h1>Manage Node.js projects and npm packages using package.json</h1>
-         <h3>Part 1 of Free Code Camp Backend Challenges</h3>
-      </div>
-   </body>
-
+<head>
+  <link href="/public/style.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+  <link rel="shortcut icon" href="https://cdn.hyperdev.com/us-east-1%3A52a203ff-088b-420f-81be-45bf559d01b1%2Ffavicon.ico" type="image/x-icon"/>
+</head>
+  <body>
+    <div class="container">
+    <h1>Create a (hopefully) shorter url!</h1>
+    <h4>*if a short url has already been created, you will receive the already created link</h4>
+    <h4>*urls must be either http:// or https://</h4>      
+    <h3>Example creation usage:</h3>
+    <code>      
+      https://neat-snail.glitch.me/new/http://foo.com:80
+    </code>
+    <br>
+    <code> 
+      https://neat-snail.glitch.me/new/https://www.google.com
+    </code>
+      
+    <h3>Example creation output</h3>
+      <div class="codeBlock">
+      {
+      <br>
+      "original_url":"https://www.google.com/",
+      <br>
+      "short_url":"https://neat-snail.glitch.me/crazyword"
+      <br>
+      }
+    </div>
+    <h3>Usage:</h3>
+    <code>
+      https://neat-snail.glitch.me/crazyword
+    </code>
+    <h3>Will redirect to:</h3>
+    <code>
+      https://www.google.com/
+    </code>
+    </div>
+  </body>
 </html>

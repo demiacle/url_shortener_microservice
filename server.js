@@ -3,10 +3,14 @@
  * the verification process may break
  * ***************************************************/
 
+
+
 'use strict';
 
 var fs = require('fs');
-var processResponse = require(process.cwd() + '/processResponse.js');
+var urlExists = require('url-exists');
+var routeShortUrl = require(process.cwd() + '/routeShortUrl.js');
+var createShortUrl = require(process.cwd() + '/createShortUrl.js')
 var express = require('express');
 var app = express();
 
@@ -33,12 +37,46 @@ app.route('/_api/package.json')
       res.type('txt').send(data.toString());
     });
   });
-  
+
+// Home page
 app.route('/')
     .get(function(req, res) {
-      processResponse();
 		  res.sendFile(process.cwd() + '/views/index.html');
     })
+
+// Create new entry
+app.route('/new/*')
+    .get(function(req, res) {
+  
+      console.log( req.params )
+      // validate website 
+      // must conform to http://www.example.com
+      // http:// or https://
+      // check if site exists
+      let url = req.params[0];
+      let match = url.match( /http:\/\/|https:\/\// )
+      console.log( match )
+  
+      urlExists( url, function(err, exists) {
+        if( match !== null && exists ){
+          createShortUrl( res, url );
+        } else {
+          res.json( { error: "The address '" + url + "' is invalid" } );
+        }
+      });
+    })
+
+// Rout a previously made short url
+app.route('/:shortUrl')
+    .get(function(req, res) {
+      // Ignore node favicon request
+      if( req.params.shortUrl === 'favicon.ico'){
+         return;
+      }
+		  routeShortUrl( req, res, req.params.shortUrl );
+    })
+
+
 
 // Respond not found to all the wrong routes
 app.use(function(req, res, next){
